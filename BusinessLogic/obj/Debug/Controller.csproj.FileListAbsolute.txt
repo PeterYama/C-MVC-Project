@@ -1,0 +1,11 @@
+C:\Users\yamam\source\repos\Presentation Layer\BusinessLogic\bin\Debug\BusinessLogic.dll.config
+C:\Users\yamam\source\repos\Presentation Layer\BusinessLogic\bin\Debug\BusinessLogic.dll
+C:\Users\yamam\source\repos\Presentation Layer\BusinessLogic\bin\Debug\BusinessLogic.pdb
+C:\Users\yamam\source\repos\Presentation Layer\BusinessLogic\bin\Debug\DataAccessLayer.dll
+C:\Users\yamam\source\repos\Presentation Layer\BusinessLogic\bin\Debug\DataAccessLayer.pdb
+C:\Users\yamam\source\repos\Presentation Layer\BusinessLogic\bin\Debug\DataAccessLayer.dll.config
+C:\Users\yamam\source\repos\Presentation Layer\BusinessLogic\obj\Debug\Controller.csprojAssemblyReference.cache
+C:\Users\yamam\source\repos\Presentation Layer\BusinessLogic\obj\Debug\Controller.csproj.CoreCompileInputs.cache
+C:\Users\yamam\source\repos\Presentation Layer\BusinessLogic\obj\Debug\Controller.csproj.CopyComplete
+C:\Users\yamam\source\repos\Presentation Layer\BusinessLogic\obj\Debug\BusinessLogic.dll
+C:\Users\yamam\source\repos\Presentation Layer\BusinessLogic\obj\Debug\BusinessLogic.pdb

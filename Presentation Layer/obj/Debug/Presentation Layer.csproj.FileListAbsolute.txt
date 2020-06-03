@@ -1,0 +1,18 @@
+C:\Users\yamam\source\repos\Presentation Layer\Presentation Layer\bin\Debug\Presentation Layer.exe.config
+C:\Users\yamam\source\repos\Presentation Layer\Presentation Layer\bin\Debug\Presentation Layer.exe
+C:\Users\yamam\source\repos\Presentation Layer\Presentation Layer\bin\Debug\Presentation Layer.pdb
+C:\Users\yamam\source\repos\Presentation Layer\Presentation Layer\bin\Debug\BusinessLogic.dll
+C:\Users\yamam\source\repos\Presentation Layer\Presentation Layer\bin\Debug\BusinessLogic.pdb
+C:\Users\yamam\source\repos\Presentation Layer\Presentation Layer\obj\Debug\Presentation Layer.csprojAssemblyReference.cache
+C:\Users\yamam\source\repos\Presentation Layer\Presentation Layer\obj\Debug\Presentation_Layer.Properties.Resources.resources
+C:\Users\yamam\source\repos\Presentation Layer\Presentation Layer\obj\Debug\Presentation Layer.csproj.GenerateResource.cache
+C:\Users\yamam\source\repos\Presentation Layer\Presentation Layer\obj\Debug\Presentation Layer.csproj.CoreCompileInputs.cache
+C:\Users\yamam\source\repos\Presentation Layer\Presentation Layer\obj\Debug\Presentation Layer.csproj.CopyComplete
+C:\Users\yamam\source\repos\Presentation Layer\Presentation Layer\obj\Debug\Presentation Layer.exe
+C:\Users\yamam\source\repos\Presentation Layer\Presentation Layer\obj\Debug\Presentation Layer.pdb
+C:\Users\yamam\source\repos\Presentation Layer\Presentation Layer\bin\Debug\DataAccessLayer.dll
+C:\Users\yamam\source\repos\Presentation Layer\Presentation Layer\bin\Debug\DataAccessLayer.pdb
+C:\Users\yamam\source\repos\Presentation Layer\Presentation Layer\bin\Debug\DataAccessLayer.dll.config
+C:\Users\yamam\source\repos\Presentation Layer\Presentation Layer\obj\Debug\Presentation_Layer.BookSearch.resources
+C:\Users\yamam\source\repos\Presentation Layer\Presentation Layer\bin\Debug\BusinessLogic.dll.config
+C:\Users\yamam\source\repos\Presentation Layer\Presentation Layer\obj\Debug\Presentation_Layer.LoginScreen.resources

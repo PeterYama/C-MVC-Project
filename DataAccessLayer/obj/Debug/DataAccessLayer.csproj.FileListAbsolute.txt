@@ -1,0 +1,7 @@
+C:\Users\yamam\source\repos\Presentation Layer\DataAccessLayer\bin\Debug\DataAccessLayer.dll
+C:\Users\yamam\source\repos\Presentation Layer\DataAccessLayer\bin\Debug\DataAccessLayer.pdb
+C:\Users\yamam\source\repos\Presentation Layer\DataAccessLayer\obj\Debug\DataAccessLayer.csproj.CoreCompileInputs.cache
+C:\Users\yamam\source\repos\Presentation Layer\DataAccessLayer\obj\Debug\DataAccessLayer.dll
+C:\Users\yamam\source\repos\Presentation Layer\DataAccessLayer\obj\Debug\DataAccessLayer.pdb
+C:\Users\yamam\source\repos\Presentation Layer\DataAccessLayer\bin\Debug\DataAccessLayer.dll.config
+C:\Users\yamam\source\repos\Presentation Layer\DataAccessLayer\obj\Debug\DataAccessLayer.csprojAssemblyReference.cache
