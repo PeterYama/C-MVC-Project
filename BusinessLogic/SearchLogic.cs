@@ -1,46 +1,38 @@
-﻿using System;
-using System.Data;
-using System.Net.Http;
-using Data_Access_Layer;
+﻿using System.Data;
+using DataAccess;
 
-namespace Business_Logic
+namespace BusinessLogic
 {
     public class SearchLogic
     {
         dbManager myDbManager; //declare dbManager
         DataSet data;
-        string queryString;
-        string message;
-
         public SearchLogic()
         {
             myDbManager = new dbManager(); // initialize 
+            data = new DataSet();
         }
-
         public DataSet getBooksBy(string userChoice)
         {
             switch (userChoice)
             {
                 case "Title":
-                    data = myDbManager.QueryDatabase("SELECT BookName FROM ViewBook");
+                    data = myDbManager.getTableUsing("SELECT BookName, PublishYear, Publisher FROM TabBook");
                     return data;
                 case "Published Year":
-                    data = myDbManager.QueryDatabase("SELECT PublishYear FROM TabBook");
+                    data = myDbManager.getTableUsing("SELECT PublishYear, BookName,  Publisher FROM TabBook");
                     return data;
                 case "Language":
-                    data = myDbManager.QueryDatabase("SELECT Language FROM TabBook");
+                    data = myDbManager.getTableUsing("SELECT Language, BookName, PublishYear, Publisher FROM TabBook");
                     return data;
                 case "Author":
-                    data = myDbManager.QueryDatabase("SELECT * FROM TabAuthor");
+                    data = myDbManager.getTableUsing("SELECT * FROM TabAuthor");
                     return data;
                 case "Display All":
-                    data = myDbManager.QueryDatabase("SELECT * FROM TabBook");
+                    data = myDbManager.getTableUsing("SELECT * FROM TabBook");
                     return data;
             }
             return null;
-
         }
-
-        
     }
 }

@@ -1,10 +1,6 @@
-﻿using Data_Access_Layer;
+﻿using DataAccess;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessLogic
 {
@@ -17,10 +13,9 @@ namespace BusinessLogic
         {
             myDbManager = new dbManager();
         }
-        public DataSet getAllBooks()
+        public DataSet getBooksAvailableToBorrow()
         {
-                data = myDbManager.QueryDatabase("SELECT TabBook.ISBN, TabBook.BookName, TabBook.PublishYear , TabBook.Publisher " +
-                "FROM TabBook ");
+                data = myDbManager.booksAvailablToBorrow();
                 return data;
         }
         public string checkBorrowableBook(int userID, string bookISBN, string borrowDate, string estimatedReturnDate)
@@ -31,16 +26,42 @@ namespace BusinessLogic
                 if (DateTime.Parse(actualReturnDate) <= DateTime.Parse(borrowDate))
                 {
                     //book is borrowed
-                    int rows = myDbManager.saveBookBorrowed(userID, bookISBN, borrowDate, estimatedReturnDate);
-                    if (rows > 0)
+                    //If not reserved return null
+                    //IF reserved return the ReservedDate
+                    string ReservedDate = myDbManager.checkReservedDate(bookISBN);
+
+                    if (ReservedDate != "")
                     {
-                        //Success
-                        message = "Book was borrowed successfully";
+                        //book has being reserved, check if reserved date is lower than user selection
+                        if(DateTime.Parse(ReservedDate) <= DateTime.Parse(borrowDate))
+                        {
+                            int rows = myDbManager.saveBookBorrowed(userID, bookISBN, borrowDate, estimatedReturnDate);
+                            if (rows > 0)
+                            {
+                                //Success
+                                message = "Book was borrowed successfully";
+                            }
+                            else
+                            {
+                                //fail
+                                message = "Fail saving book to the database";
+                            }
+                        }
                     }
                     else
                     {
-                        //fail
-                        message = "Fail saving book to the database";
+                        //book has not being Reserved and can be borrowed
+                        int rows = myDbManager.saveBookBorrowed(userID, bookISBN, borrowDate, estimatedReturnDate);
+                        if (rows > 0)
+                        {
+                            //Success
+                            message = "Book was borrowed successfully";
+                        }
+                        else
+                        {
+                            //fail
+                            message = "Fail saving book to the database";
+                        }
                     }
                 }
                 else

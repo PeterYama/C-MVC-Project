@@ -1,38 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Business_Logic;
+using BusinessLogic;
 
 namespace Presentation_Layer
 {
     public partial class LoginScreen : Form
     {
+        UserModel user;
         userLogic myUserLogic;
-        bool userCheck;
         public LoginScreen()
         {
             InitializeComponent();
             myUserLogic = new userLogic();
+            user = new UserModel();
         }
 
         private void login_btn_Click(object sender, EventArgs e)
         {
-            userCheck = myUserLogic.checkUser(user_ID_txt.Text, user_Pass_txt.Text);
+             user = myUserLogic.checkUser(user_ID_txt.Text, user_Pass_txt.Text);
 
-            if (userCheck == false)
+            if (user.userName == null)
             {
                 MessageBox.Show("Invalid User Name or Password");
             }
             else
             {
-                error_message_lbl.Text = Convert.ToString(userCheck);
-                TabViewControl firstPage = new TabViewControl();
+                TabViewControl firstPage = new TabViewControl(user);
                 this.Hide();
                 firstPage.ShowDialog();
             }

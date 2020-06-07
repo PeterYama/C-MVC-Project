@@ -1,40 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Data_Access_Layer;
+﻿using System.Data;
+using DataAccess;
 
-namespace Business_Logic
+namespace BusinessLogic
 {
     public class userLogic
     {
         dbManager myDbManager; //declare dbManager
-        bool userExist;
         DataSet data;
-
+        UserModel user;
         public userLogic()
         {
             myDbManager = new dbManager();
+            user = new UserModel();
         }
 
         //Prepare a statment agains sql injections
         //Request the database manager a query
-        public bool checkUser(string userName, string userPass)
+        public UserModel checkUser(string userName, string userPass)
         {
             data = myDbManager.CheckUser(userName, userPass);
+            //Check user Lever
+            //Lvl 1 user, Lvl 2 Support, lvl 3 Admin
+            
 
             if(data.Tables[0].Rows.Count == 0)
             {
-                userExist = false;
+                user = new UserModel();
             }
             else
             {
-                userExist = true;
+                foreach (DataRow row in data.Tables["user"].Rows)
+                {
+                    user = UserModel.Parse(row);
+                }
             }
-            return userExist;
+            return user;
         }
+
+       
         
         //Based on the result redirect the user to BookSearch Page or
         //Display an error message
