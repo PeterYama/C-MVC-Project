@@ -1,5 +1,6 @@
 ﻿using BusinessLogic;
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Runtime.InteropServices;
@@ -15,6 +16,7 @@ namespace Presentation_Layer
         BorrowLogic borrowLogic;
         ReserveLogic reserveLogic;
         ReturnLogic returnLogic;
+        BookModel defaultBook;
         DateTime localDate;
         string userChoice;
         string borrowDate;
@@ -29,6 +31,7 @@ namespace Presentation_Layer
         int adminLanguageSelected;
         int adminAuthorSelection;
         string adminPublishYear;
+        List<string> adminNewCatMessages;
         public TabViewControl(UserModel user)
         {
             localDate = DateTime.Now;
@@ -41,6 +44,7 @@ namespace Presentation_Layer
             borrowLogic = new BorrowLogic();
             reserveLogic = new ReserveLogic();
             returnLogic = new ReturnLogic();
+            defaultBook = new BookModel();
             InitializeComponent();
             InitializeDefault();
             changeVisibilityDependingOnThe(userLevel);
@@ -62,13 +66,28 @@ namespace Presentation_Layer
                 TabControl.HideTab(borrowTab);
                 TabControl.HideTab(bookRetrunTab);
                 TabControl.HideTab(reserveTab);
+                //new book dropdowns
                 this.categoryDropDown.Items.AddRange(adminLogic.getCategory());
                 this.authorDropDown.Items.AddRange(adminLogic.getAuthor());
                 this.languageDropDown.Items.AddRange(adminLogic.getLanguage());
+                //update book dropdowns
+                this.updateAuthorDropDown.Items.AddRange(adminLogic.getCategory());
+                this.updateCategoryDropDown.Items.AddRange(adminLogic.getAuthor());
+                this.updateLanguageDropDown.Items.AddRange(adminLogic.getLanguage());
+                //update DataSet for userSelection
+                dataSet = search.getBooksBy("Display All");
+                updataBookGrid.DataSource = dataSet;
+                updataBookGrid.DataMember = "books";
+                formatTable(updataBookGrid);
+                //Load List of Books to be deleted
+                updateGridUsing(deleteBookSelectionGrid);
             }
             else if((userLevel == 1) || (userLevel == 2)){
                 
                 TabControl.HideTab(addBookTab);
+                TabControl.HideTab(newFieldTab);
+                TabControl.HideTab(updateBookTab);
+                TabControl.HideTab(deleteBookTab);
             }
         }
 
@@ -119,6 +138,7 @@ namespace Presentation_Layer
             //TabPageIndex 2 = Book Borrow
             //TabPageIndex 3 = Book Reserve
             //TabPageIndex 4 = Book Return
+        
             if (e.TabPageIndex == 2)
             {
                 dataSet.Clear();
@@ -144,6 +164,7 @@ namespace Presentation_Layer
                 userBorrowedBooks_GridView.DataMember = "userBooks";
                 formatTable(userBorrowedBooks_GridView);
             }
+           
         }
         private void bookBorrowBtnClick(object sender, EventArgs e)
         {
@@ -250,10 +271,11 @@ namespace Presentation_Layer
             else
             {
                 message = returnLogic.updateSelectedBook(bookISBN, currentTime);
-
             }
             MessageBox.Show(message);
+
             //Update the List
+            dataSet.Clear();
             dataSet = returnLogic.getUserBoorrowedByTheUser(userID);
             userBorrowedBooks_GridView.DataSource = dataSet;
             userBorrowedBooks_GridView.DataMember = "userBooks";
@@ -370,5 +392,235 @@ namespace Presentation_Layer
         {
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
         }
+
+        private void addNewFieldConfirmButton_Click(object sender, EventArgs e)
+        {
+            adminNewCatMessages = new List<string>();
+            if (newCategoryTxt.Text != "")
+            {
+                adminNewCatMessages.Add(adminLogic.insertNewField(newCategoryTxt.Text, "new category"));
+            }if(newAuthorText.Text != "")
+            {
+                adminNewCatMessages.Add(adminLogic.insertNewField(newAuthorText.Text, "new author"));
+            }
+            if (newLnaguageText.Text != "")
+            {
+                adminNewCatMessages.Add(adminLogic.insertNewField(newLnaguageText.Text, "new language"));
+            }
+
+            if (adminNewCatMessages.Count != 0)
+            {
+                foreach (string item in adminNewCatMessages)
+                {
+                    MessageBox.Show(item);
+                }
+            }
+            else
+            {
+                MessageBox.Show("You need to add at least 1");
+            }
+            
+        }
+
+        private void updataBookSelected(object sender, DataGridViewCellEventArgs e)
+        {
+            
+            try
+            {
+                object bookISBN = updataBookGrid.Rows[e.RowIndex].Cells[0].Value;
+                updateUserSelection.Text = bookISBN.ToString();
+                //Create a default book to use if the user has not selected a property
+                //This will avoid null values being inserted to the database
+                defaultBook.ISBN = bookISBN.ToString();
+                defaultBook.bookName = updataBookGrid.Rows[e.RowIndex].Cells[1].Value.ToString();
+                defaultBook.author = Convert.ToInt32(updataBookGrid.Rows[e.RowIndex].Cells[2].Value);
+                defaultBook.category = Convert.ToInt32(updataBookGrid.Rows[e.RowIndex].Cells[3].Value);
+                defaultBook.language = Convert.ToInt32(updataBookGrid.Rows[e.RowIndex].Cells[4].Value);
+                defaultBook.publishYear = Convert.ToInt32(updataBookGrid.Rows[e.RowIndex].Cells[5].Value);
+                defaultBook.pages = Convert.ToInt32(updataBookGrid.Rows[e.RowIndex].Cells[6].Value);
+                defaultBook.publisher = updataBookGrid.Rows[e.RowIndex].Cells[7].Value.ToString();
+
+            }
+            catch (ArgumentOutOfRangeException problem)
+            {
+                Console.WriteLine(problem.Message);
+                MessageBox.Show("Out of Range, click over a book to select it");
+            }
+        }
+
+        private void updatePublishYearDateDropdDown_ValueChanged(object sender, EventArgs e)
+        {
+            var untreatedPublishYear = updatePublishYearDateDropdDown.Value.ToString().Replace("/", "-");
+            var publishyear = untreatedPublishYear.Remove(10);
+            adminPublishYear = publishyear.Substring(5).Replace("-", "");
+        }
+
+        private void updateConfirmBtn_Click(object sender, EventArgs e)
+        {
+
+            BookModel book = new BookModel();
+
+            if (defaultBook.ISBN != null)
+            {
+                book.ISBN = defaultBook.ISBN;
+                //if the user has not selected a property, default will be used
+                if (adminPublishYear != "")
+                {
+                    book.publishYear = Convert.ToInt32(adminPublishYear);
+                }
+                else
+                {
+                    book.publishYear = defaultBook.publishYear;
+                }
+
+                if (adminAuthorSelection > 0)
+                {
+                    book.author = adminAuthorSelection;
+                }
+                else
+                {
+                    book.author = defaultBook.author;
+                }
+
+                if (adminCategorySelected > 0)
+                {
+                    book.category = adminCategorySelected;
+                }
+                else
+                {
+                    book.category = defaultBook.category;
+                }
+                if (adminLanguageSelected > 0)
+                {
+                    book.language = adminLanguageSelected;
+                }
+                else
+                {
+                    book.language = defaultBook.language;
+                }
+
+                if (updateBookNameTxt.Text != "")
+                {
+                    book.bookName = updateBookNameTxt.Text;
+                }
+                else
+                {
+                    book.bookName = defaultBook.bookName;
+                }
+
+                if (updateNumberOfPagesText.Text != "")
+                {
+                    book.pages = Convert.ToInt32(updateNumberOfPagesText.Text);
+                }
+                else
+                {
+                    book.pages = defaultBook.pages;
+                }
+
+                if (updatePublisherText.Text != "")
+                {
+                    book.publisher = updatePublisherText.Text;
+                }
+                else
+                {
+                    book.publisher = defaultBook.publisher;
+                }
+
+                //submit the request to update
+                message = adminLogic.requestBookUpdate(book);
+            }
+            else
+            {
+                message = "Select a book to proceed";
+            }
+             MessageBox.Show(message);
+        }
+
+        private void deleteBookSelected(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                object value = deleteBookSelectionGrid.Rows[e.RowIndex].Cells[0].Value;
+                defaultBook.ISBN = value.ToString();
+                deleteBookUserSelectionTxt.Text = deleteBookSelectionGrid.Rows[e.RowIndex].Cells[1].Value.ToString();
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                MessageBox.Show("Please click on the book to select it");
+            }
+        }
+        private void bookDeleteButton_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("This will delete the book permanently " +
+                "Are you sure ?","Action Required", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                if(defaultBook.ISBN != "")
+                {
+                    message = adminLogic.requestBookDelete(defaultBook.ISBN);
+                }
+                else
+                {
+                    message = "Select one book to proceed";
+                }
+            }
+
+            MessageBox.Show(message);
+            //update the Book List
+            updateGridUsing(deleteBookSelectionGrid);
+           
+        }
+        private void updateGridUsing(DataGridView name)
+        {
+            dataSet.Clear();
+            dataSet = search.getBooksBy("Display All");
+            deleteBookSelectionGrid.DataSource = dataSet;
+            deleteBookSelectionGrid.DataMember = "books";
+            formatTable(deleteBookSelectionGrid);
+        }
+        private void Selected_TabChanged(object sender, EventArgs e)
+        {
+            //TabPageIndex 0 = (Admin) Add new book
+            //TabPageIndex 1 = (Admin) Add new Field
+            //TabPageIndex 3 = (Admin) Update a Book
+            if ((((TabControl)sender).SelectedIndex == 0) && (userID == 3))
+            {
+                //Clear the list to avoid duplicate items.
+                categoryDropDown.Items.Clear();
+                authorDropDown.Items.Clear();
+                languageDropDown.Items.Clear();
+                //update the dropdown menu
+                this.categoryDropDown.Items.AddRange(adminLogic.getCategory());
+                this.authorDropDown.Items.AddRange(adminLogic.getAuthor());
+                this.languageDropDown.Items.AddRange(adminLogic.getLanguage());
+
+            }
+            else if ((((TabControl)sender).SelectedIndex == 1) && (userID == 3))
+            {
+                //Clear the list to avoid duplicate items.
+                updateAuthorDropDown.Items.Clear();
+                updateCategoryDropDown.Items.Clear();
+                updateLanguageDropDown.Items.Clear();
+                //update book dropdowns
+                this.updateAuthorDropDown.Items.AddRange(adminLogic.getCategory());
+                this.updateCategoryDropDown.Items.AddRange(adminLogic.getAuthor());
+                this.updateLanguageDropDown.Items.AddRange(adminLogic.getLanguage());
+            }
+            else if ((((TabControl)sender).SelectedIndex == 2) && (userID == 3))
+            {
+                //update the Book List
+                dataSet = search.getBooksBy("Display All");
+                updataBookGrid.DataSource = dataSet;
+                updataBookGrid.DataMember = "books";
+                formatTable(updataBookGrid);
+            }
+            else if ((((TabControl)sender).SelectedIndex == 3) && (userID == 3))
+            {
+                //update the Book List
+                updateGridUsing(deleteBookSelectionGrid);
+            }
+        }
+
+        
     }
 }

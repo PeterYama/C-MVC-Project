@@ -71,6 +71,120 @@ namespace DataAccess
                 return dataSet;
             }
         }
+
+        public int insertNewlanguage(string text)
+        {
+            OpenConnection();
+            string queryText =
+                "Insert Into TabLanguage ( LanguageName ) Values ( @_LanguageName)";
+            using (SqlCommand sqlCommand = new SqlCommand(queryText, SqlConn))
+            {
+                // define parameters and their values
+                sqlCommand.Parameters.Add("@_LanguageName", SqlDbType.VarChar, 50).Value = text;
+                affectedRows = sqlCommand.ExecuteNonQuery();
+                CloseConnection();
+                return affectedRows;
+            }
+        }
+
+        public int updateBook(string ISBN, string bookName, int author, int categ, int lang, int publishYear, int nPages, string publisher)
+        {
+            OpenConnection();
+            string query = "UPDATE TabBook " +
+                "SET BookName = @_BookName, " +
+                "Author = @_Author, " +
+                "Category = @_Category, " +
+                "Language = @_Language, " +
+                "PublishYear = @_PublishYear, " +
+                "Pages = @_Pages, " +
+                "Publisher  = @_Publisher " +
+                "WHERE ISBN = @_ISBN";
+
+            using (SqlCommand sqlCommand = new SqlCommand(query, SqlConn))
+            {
+                sqlCommand.Parameters.Add("@_ISBN", SqlDbType.VarChar, 50).Value = ISBN;
+                sqlCommand.Parameters.Add("@_BookName", SqlDbType.VarChar, 50).Value = bookName;
+                sqlCommand.Parameters.Add("@_Author", SqlDbType.VarChar, 50).Value = author;
+                sqlCommand.Parameters.Add("@_Category", SqlDbType.Int, 5).Value = categ;
+                sqlCommand.Parameters.Add("@_Language", SqlDbType.Int, 5).Value = lang;
+                sqlCommand.Parameters.Add("@_PublishYear", SqlDbType.Int, 4).Value = publishYear;
+                sqlCommand.Parameters.Add("@_Pages", SqlDbType.Int, 5).Value = nPages;
+                sqlCommand.Parameters.Add("@_Publisher", SqlDbType.VarChar, 50).Value = publisher;
+                affectedRows = sqlCommand.ExecuteNonQuery();
+                CloseConnection();
+                return affectedRows;
+            }
+        }
+
+        public int deleteBook(string bookISBN)
+        {
+            deleteFirstChield(bookISBN);
+            deleteSecondChield(bookISBN);
+            OpenConnection();
+            string sql = "DELETE FROM TabBook WHERE ISBN = @_ISBN";
+            using (SqlCommand sqlCommand = new SqlCommand(sql, SqlConn))
+            {
+                sqlCommand.Parameters.Add("@_ISBN", SqlDbType.VarChar, 50).Value = bookISBN;
+                affectedRows = sqlCommand.ExecuteNonQuery();
+                CloseConnection();
+                return affectedRows;
+            }
+        }
+
+        private void deleteSecondChield(string bookISBN)
+        {
+            OpenConnection();
+            string sql = "DELETE FROM TabReserved WHERE ISBN = @_ISBN";
+            using (SqlCommand sqlCommand = new SqlCommand(sql, SqlConn))
+            {
+                sqlCommand.Parameters.Add("@_ISBN", SqlDbType.VarChar, 50).Value = bookISBN;
+                affectedRows = sqlCommand.ExecuteNonQuery();
+                CloseConnection();
+            }
+        }
+
+        private void deleteFirstChield(string bookISBN)
+        {
+            OpenConnection();
+            string sql = "DELETE FROM TabBorrow WHERE ISBN = @_ISBN";
+            using (SqlCommand sqlCommand = new SqlCommand(sql, SqlConn))
+            {
+                sqlCommand.Parameters.Add("@_ISBN", SqlDbType.VarChar, 50).Value = bookISBN;
+                affectedRows = sqlCommand.ExecuteNonQuery();
+                CloseConnection();
+            }
+        }
+
+        public int insertNewAuthor(string text)
+        {
+            OpenConnection();
+            string queryText =
+                "Insert Into TabAuthor ( AuthorName ) Values ( @_AuthorName)";
+            using (SqlCommand sqlCommand = new SqlCommand(queryText, SqlConn))
+            {
+                // define parameters and their values
+                sqlCommand.Parameters.Add("@_AuthorName", SqlDbType.VarChar, 50).Value = text;
+                affectedRows = sqlCommand.ExecuteNonQuery();
+                CloseConnection();
+                return affectedRows;
+            }
+        }
+
+        public int insertNewCategory(string text)
+        {
+            OpenConnection();
+            string queryText =
+                "Insert Into TabCategory ( CategoryName ) Values ( @_CategoryName)";
+            using (SqlCommand sqlCommand = new SqlCommand(queryText, SqlConn))
+            {
+                // define parameters and their values
+                sqlCommand.Parameters.Add("@_CategoryName", SqlDbType.VarChar, 50).Value = text;
+                affectedRows = sqlCommand.ExecuteNonQuery();
+                CloseConnection();
+                return affectedRows;
+            }
+        }
+
         public DataSet getCurrentCategories()
         {
             string queryString = "select * from TabCategory";
