@@ -164,21 +164,21 @@
             // 
             // TabControl
             // 
-            this.TabControl.Controls.Add(this.searchTab);
-            this.TabControl.Controls.Add(this.updateUserTab);
             this.TabControl.Controls.Add(this.nweUserTab);
+            this.TabControl.Controls.Add(this.updateUserTab);
             this.TabControl.Controls.Add(this.addBookTab);
             this.TabControl.Controls.Add(this.updateBookTab);
             this.TabControl.Controls.Add(this.deleteBookTab);
-            this.TabControl.Controls.Add(this.newFieldTab);
+            this.TabControl.Controls.Add(this.reportTab);
             this.TabControl.Controls.Add(this.browseTab);
+            this.TabControl.Controls.Add(this.searchTab);
+            this.TabControl.Controls.Add(this.newFieldTab);
             this.TabControl.Controls.Add(this.borrowTab);
             this.TabControl.Controls.Add(this.reserveTab);
             this.TabControl.Controls.Add(this.bookRetrunTab);
-            this.TabControl.Controls.Add(this.reportTab);
             this.TabControl.Location = new System.Drawing.Point(0, 2);
             this.TabControl.Name = "TabControl";
-            this.TabControl.SelectedIndex = 4;
+            this.TabControl.SelectedIndex = 11;
             this.TabControl.Size = new System.Drawing.Size(799, 449);
             this.TabControl.TabIndex = 0;
             this.TabControl.UseSelectable = true;
@@ -515,7 +515,7 @@
             this.newUserPassText.Location = new System.Drawing.Point(117, 254);
             this.newUserPassText.MaxLength = 32767;
             this.newUserPassText.Name = "newUserPassText";
-            this.newUserPassText.PasswordChar = '\0';
+            this.newUserPassText.PasswordChar = '*';
             this.newUserPassText.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.newUserPassText.SelectedText = "";
             this.newUserPassText.SelectionLength = 0;
@@ -1376,7 +1376,7 @@
             // 
             this.retrunDate_DropDown.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.retrunDate_DropDown.Location = new System.Drawing.Point(551, 162);
-            this.retrunDate_DropDown.MinimumSize = new System.Drawing.Size(4, 29);
+            this.retrunDate_DropDown.MinimumSize = new System.Drawing.Size(0, 29);
             this.retrunDate_DropDown.Name = "retrunDate_DropDown";
             this.retrunDate_DropDown.Size = new System.Drawing.Size(200, 29);
             this.retrunDate_DropDown.TabIndex = 12;
@@ -1396,7 +1396,7 @@
             this.userBorrowDate_DropDown.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.userBorrowDate_DropDown.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.userBorrowDate_DropDown.Location = new System.Drawing.Point(551, 76);
-            this.userBorrowDate_DropDown.MinimumSize = new System.Drawing.Size(4, 29);
+            this.userBorrowDate_DropDown.MinimumSize = new System.Drawing.Size(0, 29);
             this.userBorrowDate_DropDown.Name = "userBorrowDate_DropDown";
             this.userBorrowDate_DropDown.Size = new System.Drawing.Size(200, 29);
             this.userBorrowDate_DropDown.TabIndex = 10;
@@ -1533,7 +1533,7 @@
             // reserveStartDropdown
             // 
             this.reserveStartDropdown.Location = new System.Drawing.Point(552, 65);
-            this.reserveStartDropdown.MinimumSize = new System.Drawing.Size(4, 29);
+            this.reserveStartDropdown.MinimumSize = new System.Drawing.Size(0, 29);
             this.reserveStartDropdown.Name = "reserveStartDropdown";
             this.reserveStartDropdown.Size = new System.Drawing.Size(200, 29);
             this.reserveStartDropdown.TabIndex = 2;
