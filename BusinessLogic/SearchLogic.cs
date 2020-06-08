@@ -31,6 +31,16 @@ namespace BusinessLogic
                 case "Display All":
                     data = myDbManager.getTableUsing("SELECT * FROM TabBook");
                     return data;
+                case "Get Users":
+                    data = myDbManager.getAllUsers("Select * from TabUser");
+                    return data;
+                case "All Books Borrowed":
+                    data = myDbManager.getTableUsing("Select * from TabBorrow");
+                    return data;
+                case "All Pending Books":
+                    data = myDbManager.getTableUsing("Select * from TabBorrow " +
+                        "where ActualReturnDate= CAST(CURRENT_TIMESTAMP AS DATE)");
+                    return data;
             }
             return null;
         }

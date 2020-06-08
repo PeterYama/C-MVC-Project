@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Data;
-using System.Configuration;
 using System.Data.SqlClient;
-using System.Reflection;
-using System.Data.Common;
 
 namespace DataAccess
 {
@@ -42,6 +39,21 @@ namespace DataAccess
                 return dataSet;
             }
         }
+
+        public DataSet getAllUsers(string query)
+        {
+            OpenConnection();
+            using (SqlCommand sqlCommand = new SqlCommand(query, SqlConn))
+            {
+                // define parameters and their values
+                dataSet = new DataSet();
+                dataAdapter = new SqlDataAdapter(sqlCommand);
+                dataAdapter.Fill(dataSet, "users");
+                CloseConnection();
+                return dataSet;
+            }
+        }
+
         public DataSet getCurrentAuthor()
         {
             string queryString = "select * from TabAuthor";
@@ -110,6 +122,71 @@ namespace DataAccess
                 sqlCommand.Parameters.Add("@_PublishYear", SqlDbType.Int, 4).Value = publishYear;
                 sqlCommand.Parameters.Add("@_Pages", SqlDbType.Int, 5).Value = nPages;
                 sqlCommand.Parameters.Add("@_Publisher", SqlDbType.VarChar, 50).Value = publisher;
+                affectedRows = sqlCommand.ExecuteNonQuery();
+                CloseConnection();
+                return affectedRows;
+            }
+        }
+
+        public DataSet getTotalFee()
+        {
+            string queryString = "Select SUM (LateFee) as TotalFee from TabBorrow";
+            OpenConnection(); //Opens the Connection
+            SqlCommand sqlCommand = new SqlCommand(queryString, SqlConn); //Create an SqlCommand
+            dataAdapter = new SqlDataAdapter(sqlCommand);
+            dataAdapter.Fill(dataSet, "TotalFee"); //Fills a DataSet & gives a table name
+            CloseConnection();
+            return dataSet;
+        }
+
+        public int deleteUser(int user)
+        {
+            OpenConnection();
+            string sql = "DELETE FROM TabUser WHERE UID = @_User";
+            using (SqlCommand sqlCommand = new SqlCommand(sql, SqlConn))
+            {
+                sqlCommand.Parameters.Add("@_User", SqlDbType.VarChar, 50).Value = user;
+                affectedRows = sqlCommand.ExecuteNonQuery();
+                CloseConnection();
+                return affectedRows;
+            }
+        }
+
+        public int updateUser(int userID, string userName,string userPass, int userLevel, string email)
+        {
+            OpenConnection();
+            string query = "UPDATE TabUser " +
+                "SET UserName  = @_UserName, " +
+                "Password = @_Password, " +
+                "UserLevel = @_UserLevel, " +
+                "UserEmail = @_UserEmail " +
+                "WHERE UID = @_UID";
+
+            using (SqlCommand sqlCommand = new SqlCommand(query, SqlConn))
+            {
+                sqlCommand.Parameters.Add("@_UID", SqlDbType.Int, 4).Value = userID;
+                sqlCommand.Parameters.Add("@_UserName", SqlDbType.VarChar, 50).Value = userName;
+                sqlCommand.Parameters.Add("@_Password", SqlDbType.VarChar, 5).Value = userPass;
+                sqlCommand.Parameters.Add("@_UserLevel", SqlDbType.Int, 50).Value = userLevel;
+                sqlCommand.Parameters.Add("@_UserEmail", SqlDbType.VarChar, 50).Value = email;
+                affectedRows = sqlCommand.ExecuteNonQuery();
+                CloseConnection();
+                return affectedRows;
+            }
+        }
+
+        public int saveNewUser(string userName, string password, int userLevel, string email)
+        {
+            OpenConnection();
+            string queryText =
+                "Insert Into TabUser ( UserName,  Password, UserLevel, UserEmail ) Values ( @_UserName, @_Password, @_UserLevel, @_UserEmail )";
+            using (SqlCommand sqlCommand = new SqlCommand(queryText, SqlConn))
+            {
+                // define parameters and their values
+                sqlCommand.Parameters.Add("@_UserName", SqlDbType.VarChar, 50).Value = userName;
+                sqlCommand.Parameters.Add("@_Password", SqlDbType.VarChar, 50).Value = password;
+                sqlCommand.Parameters.Add("@_UserLevel", SqlDbType.Int, 4).Value = userLevel;
+                sqlCommand.Parameters.Add("@_UserEmail", SqlDbType.VarChar, 50).Value = email;
                 affectedRows = sqlCommand.ExecuteNonQuery();
                 CloseConnection();
                 return affectedRows;

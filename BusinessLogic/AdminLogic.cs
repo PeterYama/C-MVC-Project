@@ -125,5 +125,57 @@ namespace BusinessLogic
 
             return message;
         }
+
+        public string requestNewUserRegistration(UserModel user)
+        {
+            int rows = myDbManager.saveNewUser(user.userName, user.password, user.userLevel, user.email);
+            if (rows > 0)
+            {
+                message = "New User Added Sucessfully";
+            }
+            else
+            {
+                message = "Failed While adding user";
+            }
+            return message;
+        }
+
+        public string requestTotalFee()
+        {
+            DataSet collection = myDbManager.getTotalFee();
+            foreach (DataRow item in collection.Tables["TotalFee"].Rows)
+            {
+                message = item.ItemArray[0].ToString();
+            }
+            return message;
+        }
+
+        public string requestUserUpdate(UserModel user)
+        {
+            int rows = myDbManager.updateUser(user.userID, user.userName, user.password, user.accountLevel, user.email);
+            if (rows > 0)
+            {
+                message = "User Updated";
+            }
+            else
+            {
+                message = "Fail updating the user";
+            }
+            return message;
+        }
+
+        public string requsetUserDelete(int user)
+        {
+            int rows = myDbManager.deleteUser(user);
+            if (rows > 0)
+            {
+                message = "User Deleted";
+            }
+            else
+            {
+                message = "Fail Deleting the user";
+            }
+            return message;
+        }
     }
 }
