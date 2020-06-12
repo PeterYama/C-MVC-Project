@@ -1,0 +1,1060 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="getTableUsing">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="query" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getTableUsingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getTableUsingResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getAllUsers">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="query" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getAllUsersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getAllUsersResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getCurrentAuthor">
+        <s:complexType />
+      </s:element>
+      <s:element name="getCurrentAuthorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getCurrentAuthorResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getCurrentLanguage">
+        <s:complexType />
+      </s:element>
+      <s:element name="getCurrentLanguageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getCurrentLanguageResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="insertNewlanguage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="text" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="insertNewlanguageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="insertNewlanguageResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="updateBook">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ISBN" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="bookName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="author" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="categ" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="lang" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="publishYear" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="nPages" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="publisher" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="updateBookResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="updateBookResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getTotalFee">
+        <s:complexType />
+      </s:element>
+      <s:element name="getTotalFeeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getTotalFeeResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="deleteUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="user" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="deleteUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="deleteUserResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="updateUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="userID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userPass" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="userLevel" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="updateUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="updateUserResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="saveNewUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="userLevel" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="saveNewUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="saveNewUserResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="deleteBook">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="bookISBN" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="deleteBookResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="deleteBookResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="insertNewAuthor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="text" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="insertNewAuthorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="insertNewAuthorResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="insertNewCategory">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="text" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="insertNewCategoryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="insertNewCategoryResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getCurrentCategories">
+        <s:complexType />
+      </s:element>
+      <s:element name="getCurrentCategoriesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getCurrentCategoriesResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="updateActualReturnDate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="bookISBN" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="currentTime" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="updateActualReturnDateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="updateActualReturnDateResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="booksBorrowedBy">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="userID" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="booksBorrowedByResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="booksBorrowedByResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="booksAvailablToBorrow">
+        <s:complexType />
+      </s:element>
+      <s:element name="booksAvailablToBorrowResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="booksAvailablToBorrowResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="checkReservedDate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ISBN" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="checkReservedDateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="checkReservedDateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userPassword" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CheckUserResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="createNewReservedRecord">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="userID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="ISBN" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="reservationDate" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="createNewReservedRecordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="createNewReservedRecordResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="insertNewBook">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ISBN" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="bookName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="author" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="categ" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="lang" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="publishYear" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="nPages" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="publisher" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="insertNewBookResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="insertNewBookResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="checkActualReturnDate">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="bookISBN" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="checkActualReturnDateResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="checkActualReturnDateResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="saveBookBorrowed">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="userID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="bookISBN" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="borrowDate" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="estimatedReturnDate" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="saveBookBorrowedResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="saveBookBorrowedResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="getTableUsingSoapIn">
+    <wsdl:part name="parameters" element="tns:getTableUsing" />
+  </wsdl:message>
+  <wsdl:message name="getTableUsingSoapOut">
+    <wsdl:part name="parameters" element="tns:getTableUsingResponse" />
+  </wsdl:message>
+  <wsdl:message name="getAllUsersSoapIn">
+    <wsdl:part name="parameters" element="tns:getAllUsers" />
+  </wsdl:message>
+  <wsdl:message name="getAllUsersSoapOut">
+    <wsdl:part name="parameters" element="tns:getAllUsersResponse" />
+  </wsdl:message>
+  <wsdl:message name="getCurrentAuthorSoapIn">
+    <wsdl:part name="parameters" element="tns:getCurrentAuthor" />
+  </wsdl:message>
+  <wsdl:message name="getCurrentAuthorSoapOut">
+    <wsdl:part name="parameters" element="tns:getCurrentAuthorResponse" />
+  </wsdl:message>
+  <wsdl:message name="getCurrentLanguageSoapIn">
+    <wsdl:part name="parameters" element="tns:getCurrentLanguage" />
+  </wsdl:message>
+  <wsdl:message name="getCurrentLanguageSoapOut">
+    <wsdl:part name="parameters" element="tns:getCurrentLanguageResponse" />
+  </wsdl:message>
+  <wsdl:message name="insertNewlanguageSoapIn">
+    <wsdl:part name="parameters" element="tns:insertNewlanguage" />
+  </wsdl:message>
+  <wsdl:message name="insertNewlanguageSoapOut">
+    <wsdl:part name="parameters" element="tns:insertNewlanguageResponse" />
+  </wsdl:message>
+  <wsdl:message name="updateBookSoapIn">
+    <wsdl:part name="parameters" element="tns:updateBook" />
+  </wsdl:message>
+  <wsdl:message name="updateBookSoapOut">
+    <wsdl:part name="parameters" element="tns:updateBookResponse" />
+  </wsdl:message>
+  <wsdl:message name="getTotalFeeSoapIn">
+    <wsdl:part name="parameters" element="tns:getTotalFee" />
+  </wsdl:message>
+  <wsdl:message name="getTotalFeeSoapOut">
+    <wsdl:part name="parameters" element="tns:getTotalFeeResponse" />
+  </wsdl:message>
+  <wsdl:message name="deleteUserSoapIn">
+    <wsdl:part name="parameters" element="tns:deleteUser" />
+  </wsdl:message>
+  <wsdl:message name="deleteUserSoapOut">
+    <wsdl:part name="parameters" element="tns:deleteUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="updateUserSoapIn">
+    <wsdl:part name="parameters" element="tns:updateUser" />
+  </wsdl:message>
+  <wsdl:message name="updateUserSoapOut">
+    <wsdl:part name="parameters" element="tns:updateUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="saveNewUserSoapIn">
+    <wsdl:part name="parameters" element="tns:saveNewUser" />
+  </wsdl:message>
+  <wsdl:message name="saveNewUserSoapOut">
+    <wsdl:part name="parameters" element="tns:saveNewUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="deleteBookSoapIn">
+    <wsdl:part name="parameters" element="tns:deleteBook" />
+  </wsdl:message>
+  <wsdl:message name="deleteBookSoapOut">
+    <wsdl:part name="parameters" element="tns:deleteBookResponse" />
+  </wsdl:message>
+  <wsdl:message name="insertNewAuthorSoapIn">
+    <wsdl:part name="parameters" element="tns:insertNewAuthor" />
+  </wsdl:message>
+  <wsdl:message name="insertNewAuthorSoapOut">
+    <wsdl:part name="parameters" element="tns:insertNewAuthorResponse" />
+  </wsdl:message>
+  <wsdl:message name="insertNewCategorySoapIn">
+    <wsdl:part name="parameters" element="tns:insertNewCategory" />
+  </wsdl:message>
+  <wsdl:message name="insertNewCategorySoapOut">
+    <wsdl:part name="parameters" element="tns:insertNewCategoryResponse" />
+  </wsdl:message>
+  <wsdl:message name="getCurrentCategoriesSoapIn">
+    <wsdl:part name="parameters" element="tns:getCurrentCategories" />
+  </wsdl:message>
+  <wsdl:message name="getCurrentCategoriesSoapOut">
+    <wsdl:part name="parameters" element="tns:getCurrentCategoriesResponse" />
+  </wsdl:message>
+  <wsdl:message name="updateActualReturnDateSoapIn">
+    <wsdl:part name="parameters" element="tns:updateActualReturnDate" />
+  </wsdl:message>
+  <wsdl:message name="updateActualReturnDateSoapOut">
+    <wsdl:part name="parameters" element="tns:updateActualReturnDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="booksBorrowedBySoapIn">
+    <wsdl:part name="parameters" element="tns:booksBorrowedBy" />
+  </wsdl:message>
+  <wsdl:message name="booksBorrowedBySoapOut">
+    <wsdl:part name="parameters" element="tns:booksBorrowedByResponse" />
+  </wsdl:message>
+  <wsdl:message name="booksAvailablToBorrowSoapIn">
+    <wsdl:part name="parameters" element="tns:booksAvailablToBorrow" />
+  </wsdl:message>
+  <wsdl:message name="booksAvailablToBorrowSoapOut">
+    <wsdl:part name="parameters" element="tns:booksAvailablToBorrowResponse" />
+  </wsdl:message>
+  <wsdl:message name="checkReservedDateSoapIn">
+    <wsdl:part name="parameters" element="tns:checkReservedDate" />
+  </wsdl:message>
+  <wsdl:message name="checkReservedDateSoapOut">
+    <wsdl:part name="parameters" element="tns:checkReservedDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="CheckUserSoapIn">
+    <wsdl:part name="parameters" element="tns:CheckUser" />
+  </wsdl:message>
+  <wsdl:message name="CheckUserSoapOut">
+    <wsdl:part name="parameters" element="tns:CheckUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="createNewReservedRecordSoapIn">
+    <wsdl:part name="parameters" element="tns:createNewReservedRecord" />
+  </wsdl:message>
+  <wsdl:message name="createNewReservedRecordSoapOut">
+    <wsdl:part name="parameters" element="tns:createNewReservedRecordResponse" />
+  </wsdl:message>
+  <wsdl:message name="insertNewBookSoapIn">
+    <wsdl:part name="parameters" element="tns:insertNewBook" />
+  </wsdl:message>
+  <wsdl:message name="insertNewBookSoapOut">
+    <wsdl:part name="parameters" element="tns:insertNewBookResponse" />
+  </wsdl:message>
+  <wsdl:message name="checkActualReturnDateSoapIn">
+    <wsdl:part name="parameters" element="tns:checkActualReturnDate" />
+  </wsdl:message>
+  <wsdl:message name="checkActualReturnDateSoapOut">
+    <wsdl:part name="parameters" element="tns:checkActualReturnDateResponse" />
+  </wsdl:message>
+  <wsdl:message name="saveBookBorrowedSoapIn">
+    <wsdl:part name="parameters" element="tns:saveBookBorrowed" />
+  </wsdl:message>
+  <wsdl:message name="saveBookBorrowedSoapOut">
+    <wsdl:part name="parameters" element="tns:saveBookBorrowedResponse" />
+  </wsdl:message>
+  <wsdl:portType name="CloudControllerSoap">
+    <wsdl:operation name="getTableUsing">
+      <wsdl:input message="tns:getTableUsingSoapIn" />
+      <wsdl:output message="tns:getTableUsingSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getAllUsers">
+      <wsdl:input message="tns:getAllUsersSoapIn" />
+      <wsdl:output message="tns:getAllUsersSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getCurrentAuthor">
+      <wsdl:input message="tns:getCurrentAuthorSoapIn" />
+      <wsdl:output message="tns:getCurrentAuthorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getCurrentLanguage">
+      <wsdl:input message="tns:getCurrentLanguageSoapIn" />
+      <wsdl:output message="tns:getCurrentLanguageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="insertNewlanguage">
+      <wsdl:input message="tns:insertNewlanguageSoapIn" />
+      <wsdl:output message="tns:insertNewlanguageSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="updateBook">
+      <wsdl:input message="tns:updateBookSoapIn" />
+      <wsdl:output message="tns:updateBookSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getTotalFee">
+      <wsdl:input message="tns:getTotalFeeSoapIn" />
+      <wsdl:output message="tns:getTotalFeeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteUser">
+      <wsdl:input message="tns:deleteUserSoapIn" />
+      <wsdl:output message="tns:deleteUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="updateUser">
+      <wsdl:input message="tns:updateUserSoapIn" />
+      <wsdl:output message="tns:updateUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="saveNewUser">
+      <wsdl:input message="tns:saveNewUserSoapIn" />
+      <wsdl:output message="tns:saveNewUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteBook">
+      <wsdl:input message="tns:deleteBookSoapIn" />
+      <wsdl:output message="tns:deleteBookSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="insertNewAuthor">
+      <wsdl:input message="tns:insertNewAuthorSoapIn" />
+      <wsdl:output message="tns:insertNewAuthorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="insertNewCategory">
+      <wsdl:input message="tns:insertNewCategorySoapIn" />
+      <wsdl:output message="tns:insertNewCategorySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getCurrentCategories">
+      <wsdl:input message="tns:getCurrentCategoriesSoapIn" />
+      <wsdl:output message="tns:getCurrentCategoriesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="updateActualReturnDate">
+      <wsdl:input message="tns:updateActualReturnDateSoapIn" />
+      <wsdl:output message="tns:updateActualReturnDateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="booksBorrowedBy">
+      <wsdl:input message="tns:booksBorrowedBySoapIn" />
+      <wsdl:output message="tns:booksBorrowedBySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="booksAvailablToBorrow">
+      <wsdl:input message="tns:booksAvailablToBorrowSoapIn" />
+      <wsdl:output message="tns:booksAvailablToBorrowSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="checkReservedDate">
+      <wsdl:input message="tns:checkReservedDateSoapIn" />
+      <wsdl:output message="tns:checkReservedDateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckUser">
+      <wsdl:input message="tns:CheckUserSoapIn" />
+      <wsdl:output message="tns:CheckUserSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="createNewReservedRecord">
+      <wsdl:input message="tns:createNewReservedRecordSoapIn" />
+      <wsdl:output message="tns:createNewReservedRecordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="insertNewBook">
+      <wsdl:input message="tns:insertNewBookSoapIn" />
+      <wsdl:output message="tns:insertNewBookSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="checkActualReturnDate">
+      <wsdl:input message="tns:checkActualReturnDateSoapIn" />
+      <wsdl:output message="tns:checkActualReturnDateSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="saveBookBorrowed">
+      <wsdl:input message="tns:saveBookBorrowedSoapIn" />
+      <wsdl:output message="tns:saveBookBorrowedSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CloudControllerSoap" type="tns:CloudControllerSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getTableUsing">
+      <soap:operation soapAction="http://tempuri.org/getTableUsing" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAllUsers">
+      <soap:operation soapAction="http://tempuri.org/getAllUsers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCurrentAuthor">
+      <soap:operation soapAction="http://tempuri.org/getCurrentAuthor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCurrentLanguage">
+      <soap:operation soapAction="http://tempuri.org/getCurrentLanguage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="insertNewlanguage">
+      <soap:operation soapAction="http://tempuri.org/insertNewlanguage" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateBook">
+      <soap:operation soapAction="http://tempuri.org/updateBook" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTotalFee">
+      <soap:operation soapAction="http://tempuri.org/getTotalFee" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteUser">
+      <soap:operation soapAction="http://tempuri.org/deleteUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateUser">
+      <soap:operation soapAction="http://tempuri.org/updateUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveNewUser">
+      <soap:operation soapAction="http://tempuri.org/saveNewUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteBook">
+      <soap:operation soapAction="http://tempuri.org/deleteBook" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="insertNewAuthor">
+      <soap:operation soapAction="http://tempuri.org/insertNewAuthor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="insertNewCategory">
+      <soap:operation soapAction="http://tempuri.org/insertNewCategory" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCurrentCategories">
+      <soap:operation soapAction="http://tempuri.org/getCurrentCategories" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateActualReturnDate">
+      <soap:operation soapAction="http://tempuri.org/updateActualReturnDate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="booksBorrowedBy">
+      <soap:operation soapAction="http://tempuri.org/booksBorrowedBy" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="booksAvailablToBorrow">
+      <soap:operation soapAction="http://tempuri.org/booksAvailablToBorrow" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkReservedDate">
+      <soap:operation soapAction="http://tempuri.org/checkReservedDate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckUser">
+      <soap:operation soapAction="http://tempuri.org/CheckUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createNewReservedRecord">
+      <soap:operation soapAction="http://tempuri.org/createNewReservedRecord" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="insertNewBook">
+      <soap:operation soapAction="http://tempuri.org/insertNewBook" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkActualReturnDate">
+      <soap:operation soapAction="http://tempuri.org/checkActualReturnDate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveBookBorrowed">
+      <soap:operation soapAction="http://tempuri.org/saveBookBorrowed" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CloudControllerSoap12" type="tns:CloudControllerSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getTableUsing">
+      <soap12:operation soapAction="http://tempuri.org/getTableUsing" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAllUsers">
+      <soap12:operation soapAction="http://tempuri.org/getAllUsers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCurrentAuthor">
+      <soap12:operation soapAction="http://tempuri.org/getCurrentAuthor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCurrentLanguage">
+      <soap12:operation soapAction="http://tempuri.org/getCurrentLanguage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="insertNewlanguage">
+      <soap12:operation soapAction="http://tempuri.org/insertNewlanguage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateBook">
+      <soap12:operation soapAction="http://tempuri.org/updateBook" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTotalFee">
+      <soap12:operation soapAction="http://tempuri.org/getTotalFee" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteUser">
+      <soap12:operation soapAction="http://tempuri.org/deleteUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateUser">
+      <soap12:operation soapAction="http://tempuri.org/updateUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveNewUser">
+      <soap12:operation soapAction="http://tempuri.org/saveNewUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteBook">
+      <soap12:operation soapAction="http://tempuri.org/deleteBook" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="insertNewAuthor">
+      <soap12:operation soapAction="http://tempuri.org/insertNewAuthor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="insertNewCategory">
+      <soap12:operation soapAction="http://tempuri.org/insertNewCategory" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCurrentCategories">
+      <soap12:operation soapAction="http://tempuri.org/getCurrentCategories" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateActualReturnDate">
+      <soap12:operation soapAction="http://tempuri.org/updateActualReturnDate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="booksBorrowedBy">
+      <soap12:operation soapAction="http://tempuri.org/booksBorrowedBy" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="booksAvailablToBorrow">
+      <soap12:operation soapAction="http://tempuri.org/booksAvailablToBorrow" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkReservedDate">
+      <soap12:operation soapAction="http://tempuri.org/checkReservedDate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckUser">
+      <soap12:operation soapAction="http://tempuri.org/CheckUser" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createNewReservedRecord">
+      <soap12:operation soapAction="http://tempuri.org/createNewReservedRecord" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="insertNewBook">
+      <soap12:operation soapAction="http://tempuri.org/insertNewBook" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkActualReturnDate">
+      <soap12:operation soapAction="http://tempuri.org/checkActualReturnDate" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveBookBorrowed">
+      <soap12:operation soapAction="http://tempuri.org/saveBookBorrowed" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CloudController">
+    <wsdl:port name="CloudControllerSoap" binding="tns:CloudControllerSoap">
+      <soap:address location="https://localhost:44357/CloudController.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CloudControllerSoap12" binding="tns:CloudControllerSoap12">
+      <soap12:address location="https://localhost:44357/CloudController.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

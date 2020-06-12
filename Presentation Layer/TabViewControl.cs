@@ -9,6 +9,7 @@ namespace Presentation_Layer
 {
     public partial class TabViewControl : Form
     { 
+        //Declare Global Variables
         DataSet dataSet;
         AdminLogic adminLogic;
         SearchLogic search;
@@ -34,11 +35,12 @@ namespace Presentation_Layer
         int adminAuthorSelection;
         int userAccountLevel;
 
+        //Initialize Global Variables
         public TabViewControl(UserModel user)
         {
             InitializeComponent();
             localDate = DateTime.Now;
-            currentTime = localDate.ToString().Remove(9).Replace("/", "-");
+            currentTime = localDate.GetDateTimeFormats()[0].ToString().Replace("/", "-");
             userID = user.userID;
             userLevel = user.userLevel;
             dataSet = new DataSet();
@@ -143,8 +145,7 @@ namespace Presentation_Layer
             }
            
         }
-        
- 
+        //handle Borrow Button
         private void bookBorrowBtnClick(object sender, EventArgs e)
         {
             //front-end validation to check if any value is null
@@ -169,7 +170,7 @@ namespace Presentation_Layer
             }
 
         }
-
+        //When user has clicked on a date
         private void setBorrowDate(object sender, EventArgs e)
         {
             //Get user Borrow Date
@@ -179,7 +180,7 @@ namespace Presentation_Layer
             borrowDate = borrowStrTimeRemoved.Trim();
             
         }
-
+        //When user has clicked on a date
         private void setReturnDate(object sender, EventArgs e)
         {
             //Get user Return Date
@@ -187,7 +188,7 @@ namespace Presentation_Layer
             var returnStrTimeRemoved = returnStr.Remove(10);
             returnDate = returnStrTimeRemoved.Trim();
         }
-
+        //Get user ISBN and set the global variable
         private void reserveGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             try
@@ -263,12 +264,12 @@ namespace Presentation_Layer
 
         private void formatTable(DataGridView name)
         {
+            //Extend grid cells to fill the grid
             name.DataBindingComplete += (o, _) =>
             {
                 var dataGridView = o as DataGridView;
                 if (dataGridView != null)
                 {
-                    //need to handle ArgumentOutOfRangeException
                     dataGridView.BackgroundColor = Color.LightGray;
                     dataGridView.AutoSizeColumnsMode = 
                     DataGridViewAutoSizeColumnsMode.AllCells;
@@ -280,11 +281,10 @@ namespace Presentation_Layer
 
         private void addBookBtn_Click(object sender, EventArgs e)
         {
-            //Should grab the user input and send to Admin Logic
-            //Grab adminPublisherText.Txt, adminNumberOfPagesTxt.Txt, adminBookTitleTxt
-            //Add to book model
+            //Add to Book Model
             //request to save the new book to the db
             var rand = new Random();
+            //Create a Random ISBN
             bookISBN = rand.Next().ToString();
             BookModel book = new BookModel();
             //Check if the form was filled properly
@@ -579,7 +579,7 @@ namespace Presentation_Layer
                     formatTable(userBorrowedBooks_GridView);
                     break;
                 case "browseTab":
-                    updateBookGridUsing(reserveGridView);
+                    updateBookGridUsing(resultGridView);
                     break;
                 case "reserveTab":
                     dataSet.Clear();

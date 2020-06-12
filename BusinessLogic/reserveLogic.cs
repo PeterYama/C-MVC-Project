@@ -1,28 +1,37 @@
-﻿using System;
+﻿using BusinessLogic.CloudController;
+using System;
 using System.Data;
-using DataAccess;
+using System.ServiceModel;
+using System.ServiceModel.Channels;
 
 namespace BusinessLogic
 {
     public class ReserveLogic
     {
-        dbManager myDbManager;
+        //Create object of the Binding
+        static Binding binding;
+        //Create endpointAddress of the Service
+        static EndpointAddress endpointAddress;
+        //Create Client of the Service
+        CloudControllerSoapClient cloudController;
         string message;
         DataSet data;
         public ReserveLogic()
         {
-            myDbManager = new dbManager();
+            binding = new BasicHttpsBinding();
+            endpointAddress = new
+            EndpointAddress("https://localhost:44357/CloudController.asmx");
+            cloudController = new CloudControllerSoapClient(binding, endpointAddress);
         }
         public string saveNewRecordToReserved(string bookISBN, string borrowDate, int userID)
         {
             //Check if the book is already reserved
-            myDbManager = new dbManager();
             string query = "select * from tabborrow where ISBN = " + bookISBN;
             //Check if the user has selected a book
             if (bookISBN != null)
             {
                 //save new record
-                string ReservedDate = myDbManager.checkReservedDate(bookISBN);
+                string ReservedDate = cloudController.checkReservedDate(bookISBN);
 
                 if (ReservedDate != "")
                 {
@@ -31,7 +40,7 @@ namespace BusinessLogic
                     if (DateTime.Parse(ReservedDate) <= DateTime.Parse(borrowDate))
                     {
                         //Book can be reserved
-                        int userSaved = myDbManager.createNewReservedRecord(userID, bookISBN, borrowDate);
+                        int userSaved = cloudController.createNewReservedRecord(userID, bookISBN, borrowDate);
                         if (userSaved == 1)
                         {
                             message = "Book Reserved";
@@ -49,7 +58,7 @@ namespace BusinessLogic
                 else
                 {
                     //book bas not being reserved, user can reserve
-                    int userSaved = myDbManager.createNewReservedRecord(userID, bookISBN, borrowDate);
+                    int userSaved = cloudController.createNewReservedRecord(userID, bookISBN, borrowDate);
                     if (userSaved == 1)
                     {
                         message = "Book Reserved";
@@ -71,7 +80,7 @@ namespace BusinessLogic
 
         public DataSet getBooksReservable()
         {
-            data = myDbManager.booksAvailablToBorrow();
+            data = cloudController.booksAvailablToBorrow();
             return data;
         }
     }

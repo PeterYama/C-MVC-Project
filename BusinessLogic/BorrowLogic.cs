@@ -1,26 +1,37 @@
-﻿using DataAccess;
+﻿using BusinessLogic.CloudController;
 using System;
 using System.Data;
+using System.ServiceModel;
+using System.ServiceModel.Channels;
 
 namespace BusinessLogic
 {
     public class BorrowLogic
     {
-        dbManager myDbManager;
+        //Create object of the Binding
+        static Binding binding;
+        //Create endpointAddress of the Service
+        static EndpointAddress endpointAddress;
+        //Create Client of the Service
+        CloudControllerSoapClient cloudController;
         DataSet data;
         string message;
+
         public BorrowLogic()
         {
-            myDbManager = new dbManager();
+            binding = new BasicHttpsBinding();
+            endpointAddress = new
+            EndpointAddress("https://localhost:44357/CloudController.asmx");
+            cloudController = new CloudControllerSoapClient(binding, endpointAddress);
         }
         public DataSet getBooksAvailableToBorrow()
         {
-                data = myDbManager.booksAvailablToBorrow();
+                data = cloudController.booksAvailablToBorrow();
                 return data;
         }
         public string checkBorrowableBook(int userID, string bookISBN, string borrowDate, string estimatedReturnDate)
         {
-            string actualReturnDate = myDbManager.checkActualReturnDate(bookISBN);
+            string actualReturnDate = cloudController.checkActualReturnDate(bookISBN);
             if (actualReturnDate != "")
             {
                 if (DateTime.Parse(actualReturnDate) <= DateTime.Parse(borrowDate))
@@ -28,14 +39,14 @@ namespace BusinessLogic
                     //book is borrowed
                     //If not reserved return null
                     //IF reserved return the ReservedDate
-                    string ReservedDate = myDbManager.checkReservedDate(bookISBN);
+                    string ReservedDate = cloudController.checkReservedDate(bookISBN);
 
                     if (ReservedDate != "")
                     {
                         //book has being reserved, check if reserved date is lower than user selection
                         if(DateTime.Parse(ReservedDate) <= DateTime.Parse(borrowDate))
                         {
-                            int rows = myDbManager.saveBookBorrowed(userID, bookISBN, borrowDate, estimatedReturnDate);
+                            int rows = cloudController.saveBookBorrowed(userID, bookISBN, borrowDate, estimatedReturnDate);
                             if (rows > 0)
                             {
                                 //Success
@@ -51,7 +62,7 @@ namespace BusinessLogic
                     else
                     {
                         //book has not being Reserved and can be borrowed
-                        int rows = myDbManager.saveBookBorrowed(userID, bookISBN, borrowDate, estimatedReturnDate);
+                        int rows = cloudController.saveBookBorrowed(userID, bookISBN, borrowDate, estimatedReturnDate);
                         if (rows > 0)
                         {
                             //Success

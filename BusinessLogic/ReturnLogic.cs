@@ -1,27 +1,36 @@
-﻿using System.Data;
-using DataAccess;
+﻿using BusinessLogic.CloudController;
+using System.Data;
+using System.ServiceModel;
+using System.ServiceModel.Channels;
+
 namespace BusinessLogic
 {
     public class ReturnLogic
     {
-        dbManager myDbManager;
+        //Create object of the Binding
+        static Binding binding;
+        //Create endpointAddress of the Service
+        static EndpointAddress endpointAddress;
+        //Create Client of the Service
+        CloudControllerSoapClient cloudController;
         public ReturnLogic()
         {
-            myDbManager = new dbManager();
+            binding = new BasicHttpsBinding();
+            endpointAddress = new
+            EndpointAddress("https://localhost:44357/CloudController.asmx");
+            cloudController = new CloudControllerSoapClient(binding, endpointAddress);
         }
 
         public DataSet getUserBoorrowedByTheUser(int userID)
         {
-            //should remove the user selection from the table
-            //should return an updatad table and set to the grid view
-            DataSet userBooks = myDbManager.booksBorrowedBy(userID);
+            DataSet userBooks = cloudController.booksBorrowedBy(userID);
             return userBooks;
         }
 
         //should Update not delete
         public string updateSelectedBook(string bookISBN, string currentDate)
         {
-            int rowsAffected = myDbManager.updateActualReturnDate(bookISBN, currentDate);
+            int rowsAffected = cloudController.updateActualReturnDate(bookISBN, currentDate);
             if (rowsAffected >= 1)
             {
                 return "Returned Successfully";

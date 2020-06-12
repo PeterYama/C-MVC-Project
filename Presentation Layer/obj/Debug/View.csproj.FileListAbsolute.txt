@@ -5,11 +5,8 @@ C:\Users\yamam\source\repos\Presentation Layer\Presentation Layer\bin\Debug\Busi
 C:\Users\yamam\source\repos\Presentation Layer\Presentation Layer\bin\Debug\MetroFramework.Design.dll
 C:\Users\yamam\source\repos\Presentation Layer\Presentation Layer\bin\Debug\MetroFramework.dll
 C:\Users\yamam\source\repos\Presentation Layer\Presentation Layer\bin\Debug\MetroFramework.Fonts.dll
-C:\Users\yamam\source\repos\Presentation Layer\Presentation Layer\bin\Debug\DataAccessLayer.dll
 C:\Users\yamam\source\repos\Presentation Layer\Presentation Layer\bin\Debug\BusinessLogic.pdb
 C:\Users\yamam\source\repos\Presentation Layer\Presentation Layer\bin\Debug\BusinessLogic.dll.config
-C:\Users\yamam\source\repos\Presentation Layer\Presentation Layer\bin\Debug\DataAccessLayer.pdb
-C:\Users\yamam\source\repos\Presentation Layer\Presentation Layer\bin\Debug\DataAccessLayer.dll.config
 C:\Users\yamam\source\repos\Presentation Layer\Presentation Layer\obj\Debug\View.csprojAssemblyReference.cache
 C:\Users\yamam\source\repos\Presentation Layer\Presentation Layer\obj\Debug\Presentation_Layer.LoginScreen.resources
 C:\Users\yamam\source\repos\Presentation Layer\Presentation Layer\obj\Debug\Presentation_Layer.Properties.Resources.resources

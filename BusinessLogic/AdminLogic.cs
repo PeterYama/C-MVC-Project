@@ -1,24 +1,35 @@
-﻿using System;
+﻿using BusinessLogic.CloudController;
 using System.Data;
 using System.Linq;
-using DataAccess;
+using System.ServiceModel;
+using System.ServiceModel.Channels;
+
 namespace BusinessLogic
+
 {
     public class AdminLogic
     {
-        dbManager myDbManager;
         object[] temp;
         int count = 0;
         string message;
+        //Create object of the Binding
+        static Binding binding;
+        //Create endpointAddress of the Service
+        static EndpointAddress endpointAddress;
+        //Create Client of the Service
+        CloudControllerSoapClient cloudController;
         public AdminLogic()
         {
-            myDbManager = new dbManager();
+            binding = new BasicHttpsBinding();
+            endpointAddress = new
+            EndpointAddress("https://localhost:44357/CloudController.asmx");
+            cloudController = new CloudControllerSoapClient(binding, endpointAddress);
         }
 
         public object[] getCategory()
         {
             DataSet tempDataSet = new DataSet();
-            tempDataSet = myDbManager.getCurrentCategories();
+            tempDataSet = cloudController.getCurrentCategories();
             temp = new object[30];
             foreach (DataRow row in tempDataSet.Tables["categories"].Rows)
             {
@@ -33,7 +44,7 @@ namespace BusinessLogic
         public object[] getAuthor()
         {
             DataSet tempDataSet = new DataSet();
-            tempDataSet = myDbManager.getCurrentAuthor();
+            tempDataSet = cloudController.getCurrentAuthor();
             temp = new object[30];
             foreach (DataRow row in tempDataSet.Tables["author"].Rows)
             {
@@ -48,7 +59,7 @@ namespace BusinessLogic
         public object[] getLanguage()
         {
             DataSet tempDataSet = new DataSet();
-            tempDataSet = myDbManager.getCurrentLanguage();
+            tempDataSet = cloudController.getCurrentLanguage();
             temp = new object[30];
             foreach (DataRow row in tempDataSet.Tables["language"].Rows)
             {
@@ -63,7 +74,7 @@ namespace BusinessLogic
         public int handleNewBookInsertion(BookModel book)
         {
             //get the book obj then pass to the DataAccess
-            int affectedrows = myDbManager.insertNewBook(book.ISBN, book.bookName, book.author, book.category, book.language, book.publishYear,book.pages, book.publisher);
+            int affectedrows = cloudController.insertNewBook(book.ISBN, book.bookName, book.author, book.category, book.language, book.publishYear,book.pages, book.publisher);
             return affectedrows;
         }
 
@@ -71,7 +82,7 @@ namespace BusinessLogic
         {
             if (v == "new category")
             {
-                int rows = myDbManager.insertNewCategory(text);
+                int rows = cloudController.insertNewCategory(text);
                 if (rows > 0)
                 {
                     message = "New Category was added";
@@ -79,7 +90,7 @@ namespace BusinessLogic
             }
             else if (v == "new author")
             {
-                int rows = myDbManager.insertNewAuthor(text);
+                int rows = cloudController.insertNewAuthor(text);
                 if (rows > 0)
                 {
                     message = "New Author was added";
@@ -87,7 +98,7 @@ namespace BusinessLogic
             }
             else if (v == "new language")
             {
-                int rows = myDbManager.insertNewlanguage(text);
+                int rows = cloudController.insertNewlanguage(text);
                 if (rows > 0)
                 {
                     message = "New Laguage was added";
@@ -99,7 +110,7 @@ namespace BusinessLogic
 
         public string requestBookUpdate(BookModel book)
         {
-            int rows = myDbManager.updateBook(book.ISBN, book.bookName, book.author, book.category, book.language, book.publishYear, book.pages, book.publisher);
+            int rows = cloudController.updateBook(book.ISBN, book.bookName, book.author, book.category, book.language, book.publishYear, book.pages, book.publisher);
             if (rows > 0)
             {
                 message = "Success";
@@ -113,7 +124,7 @@ namespace BusinessLogic
 
         public string requestBookDelete(string bookISBN)
         {
-            int rows = myDbManager.deleteBook(bookISBN);
+            int rows = cloudController.deleteBook(bookISBN);
             if (rows > 0)
             {
                 message = "Book was deleted";
@@ -128,7 +139,7 @@ namespace BusinessLogic
 
         public string requestNewUserRegistration(UserModel user)
         {
-            int rows = myDbManager.saveNewUser(user.userName, user.password, user.userLevel, user.email);
+            int rows = cloudController.saveNewUser(user.userName, user.password, user.userLevel, user.email);
             if (rows > 0)
             {
                 message = "New User Added Sucessfully";
@@ -142,7 +153,7 @@ namespace BusinessLogic
 
         public string requestTotalFee()
         {
-            DataSet collection = myDbManager.getTotalFee();
+            DataSet collection = cloudController.getTotalFee();
             foreach (DataRow item in collection.Tables["TotalFee"].Rows)
             {
                 message = item.ItemArray[0].ToString();
@@ -152,7 +163,7 @@ namespace BusinessLogic
 
         public string requestUserUpdate(UserModel user)
         {
-            int rows = myDbManager.updateUser(user.userID, user.userName, user.password, user.accountLevel, user.email);
+            int rows = cloudController.updateUser(user.userID, user.userName, user.password, user.accountLevel, user.email);
             if (rows > 0)
             {
                 message = "User Updated";
@@ -166,7 +177,7 @@ namespace BusinessLogic
 
         public string requsetUserDelete(int user)
         {
-            int rows = myDbManager.deleteUser(user);
+            int rows = cloudController.deleteUser(user);
             if (rows > 0)
             {
                 message = "User Deleted";
